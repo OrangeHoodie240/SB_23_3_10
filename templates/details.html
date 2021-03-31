@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Details {% endblock %}
+
+{% block header %} <h1>{{ user.first_name }} Details</h1> {% endblock %}
+
+{% block main %}
+    {% if user.image_url %}
+        <img src='{{ user.image_url }}' alt='user image' /> 
+    {% endif %}
+    <p>{{ user.first_name }} {{ user.last_name }}</p>
+
+    <a href='/users/{{ user.id }}/edit'>Edit Details</a>
+    <form class='delete_button' method='POST' action='/users/{{ user.id }}/delete'><button>Delete</button></form>
+{% endblock %}

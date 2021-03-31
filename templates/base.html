@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type='text/css' rel='stylesheet' href='../static/styles.css' />
+
+    <!-- The above link isn't loading for edit-details.html for some reason, though it works everywhere else -->
+    <!-- Added this manual style block in the meantime -->
+    <style>
+        {% block manual_styles %} {% endblock %}
+    </style>
+    
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+</body>
+</html>
