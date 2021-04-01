@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block header %}<h1>{{ post.title }}</h1>{% endblock %}
+
+
+{% block main %}
+    <div class='post-container'>
+        <p>{{ post.content }}</p>
+        <footer><em>by {{ post.user.first_name + ' ' + post.user.last_name }}</em></footer>
+    </div>
+
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class='control_block'>
+        <button class='controls' ><a href='/users/{{ post.user_id }}'>Return</a></button>
+        <button class='controls' ><a href='/posts/{{ post.id }}/edit'>Edit</a></button>
+        <form method='post' action='/posts/{{ post.id }}/delete'><button>Delete</button></form>
+    </div>
+{% endblock %}

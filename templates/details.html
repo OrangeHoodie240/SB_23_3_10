@@ -5,11 +5,31 @@
 {% block header %} <h1>{{ user.first_name }} Details</h1> {% endblock %}
 
 {% block main %}
+    <button class='controls'><a href='/'>Back</a></button>
+    <br />
+    <br />
+    <br />
+
     {% if user.image_url %}
-        <img src='{{ user.image_url }}' alt='user image' /> 
+        <img class='image-url' src='{{ user.image_url }}' alt='user image' /> 
     {% endif %}
     <p>{{ user.first_name }} {{ user.last_name }}</p>
 
-    <a href='/users/{{ user.id }}/edit'>Edit Details</a>
-    <form class='delete_button' method='POST' action='/users/{{ user.id }}/delete'><button>Delete</button></form>
+    {% if user.posts | length > 0 %}
+        <h2>Posts</h2>
+        <ul>
+            {% for post in user.posts %}
+                <li><a href='/posts/{{ post.id }}'>{{ post.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No posts yet</p>
+    {% endif %}
+
+
+    <div class='control_block'>
+        <button class='controls'><a href='/users/{{ user.id }}/posts/new'>Add Post</a></button>
+        <button class='controls'><a href='/users/{{ user.id }}/edit'>Edit Details</a></button>
+        <form method='POST' action='/users/{{ user.id }}/delete'><button>Delete</button></form>
+    </div>
 {% endblock %}

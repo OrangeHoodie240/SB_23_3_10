@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ post.title }} {% endblock %}
+
+{% block header %} <h1>{{ post.title }}</h1>{% endblock %}
+
+
+{% block main %}
+    <form method='POST', action='/posts/{{ post.id }}/edit'>
+        <div class='post_form'>
+            <label for='title'>Title: </label>
+            <input type='text' id='title' name='title' value='{{ post.title }}' required />
+            <label for='content'>Content: </label>
+            <textarea rows='20' id='content' name='content' required >{{ post.content }}</textarea>
+            <button>Submit</button>
+        </div>
+    </form>
+    <button class='controls cancel_button'><a href='/users/{{ post.user.id }}'>Cancel</a></button>
+{% endblock %}

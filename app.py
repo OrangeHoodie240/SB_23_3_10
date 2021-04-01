@@ -1,7 +1,7 @@
 """Blogly application."""
 
 from flask import Flask, request, render_template, session, flash, redirect
-from models import db, connect_db, User
+from models import db, connect_db, User, Post
 from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
@@ -57,7 +57,7 @@ def edit_details(id):
 
 
 @app.route('/users/<int:id>/edit', methods=['POST'])
-def updete_details(id):
+def update_details(id):
     first_name = request.form.get('first_name')
     last_name = request.form.get('last_name')
     image_url = request.form.get('image_url', None)
@@ -70,3 +70,44 @@ def updete_details(id):
 def delete_user(id):
     User.delete_user(id)
     return redirect('/')
+
+
+@app.route('/users/<int:id>/posts/new')
+def add_post_form(id):
+    return render_template('post_form.html', id=id)
+
+
+@app.route('/users/<int:id>/posts/new', methods=['POST'])
+def commit_post(id):
+    title = request.form.get('title')
+    content = request.form.get('content')
+    Post.add_post(title, content, id)
+
+    return redirect(f'/users/{id}')
+
+
+@app.route('/posts/<int:id>')
+def show_post(id):
+    post = Post.get_post_by_id(id)
+    return render_template('view_post.html', post=post)
+
+
+@app.route('/posts/<int:id>/edit')
+def edit_post_form(id):
+    post = Post.get_post_by_id(id)
+    return render_template('edit_post.html', post=post)
+
+@app.route('/posts/<int:id>/edit', methods=['POST'])
+def commit_edit_post(id):
+    title = request.form.get('title')
+    content = request.form.get('content')
+    Post.update_post(id, title, content)
+    return redirect(f'/posts/{id}')
+
+
+@app.route('/posts/<int:id>/delete', methods=['POST'])
+def delete_post(id):
+    post = Post.get_post_by_id(id)
+    user_id = post.user_id
+    Post.delete_by_id(post.id)
+    return redirect(f'/users/{user_id}')

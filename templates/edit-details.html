@@ -1,25 +1,5 @@
 {% extends 'base.html' %}
 
-
-<!-- For some reason it stopped loading my styles.css for this one page -->
-<!-- I added in a style block to base.html -->
-{% block manual_styles %}
-    header { 
-        text-align: center;
-    }
-    form {
-        margin-top: 5%;
-    }
-    .user_form_div {
-        width: 35%; 
-        margin-left: auto; 
-        margin-right: auto; 
-        display: grid; 
-        grid-template-columns: .5fr 1.5fr;
-        row-gap: 10px;
-    }
-{% endblock %}
-
 {% block title %} Edit Details {% endblock %}
 
 {% block header %} <h1>Edit Details</h1> {% endblock %}
@@ -28,10 +8,10 @@
 <form method='POST' action='/users/{{ user.id }}/edit'>
     <div class='user_form_div'>
         <label for='first_name'>First Name: </label>
-        <input id='first_name' name='first_name' type='text' value='{{ user.first_name }}' />
+        <input id='first_name' name='first_name' type='text' value='{{ user.first_name }}' required />
 
         <label for='last_name'>Last Name: </label>
-        <input id='last_name' name='last_name' type='text' value='{{ user.last_name }}' />
+        <input id='last_name' name='last_name' type='text' value='{{ user.last_name }}' required />
 
         <label for='image_url'>Image Url: </label>
         <input id='image_url' name='image_url' type='text' value='{{ user.image_url }}' />
@@ -39,5 +19,7 @@
 
     </div>
 </form>
+
+    <button class='cancel_button controls'><a href='/users/{{ user.id }}'>Cancel</a></button>
 
 {% endblock %}
