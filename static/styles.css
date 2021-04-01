@@ -71,3 +71,27 @@ header {
     background-color: red;
 }
 
+.tag-form {
+    width: 30%; 
+    margin-top: 10%;
+    margin-left: auto; 
+    margin-right: auto; 
+    display: grid; 
+    grid-template-columns: .3fr 1.7fr;
+    row-gap: 10px;
+}
+
+.tag-form button {
+    grid-column: 2; 
+}
+
+.two-controls {
+    display: grid; 
+    width: 20%; 
+    margin-left: auto; 
+    margin-right: auto;
+    grid-template-columns: 1fr 1fr;
+}
+.two-controls form button {
+    width: 100%;
+}
